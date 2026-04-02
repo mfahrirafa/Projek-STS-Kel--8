@@ -1,11 +1,10 @@
-
 const productData = {
-    "buku tulis":   { harga: 20000, img: "./IMG/buku tulis.jpeg" },
-    "pulpen":       { harga: 5000,  img: "./IMG/pulpen.jpeg" },
-    "pensil":       { harga: 3000,  img: "./IMG/pensil.jpeg" },
-    "penghapus":    { harga: 2000,  img: "./IMG/penghapus.jpeg" },
-    "pengaris":     { harga: 7000,  img: "./IMG/pengaris.jpeg" },
-    "tas sekolah":  { harga: 150000, img: "./IMG/tas sekolah.jpeg" },
+    "buku tulis":   { harga: 20000, img: "./IMG/buku Tulis.jpg" },
+    "pulpen":       { harga: 5000,  img: "./IMG/pulpen.jpg" },
+    "pensil":       { harga: 3000,  img: "./IMG/pensil.jpg" },
+    "penghapus":    { harga: 2000,  img: "./IMG/penghapus.jpg" },
+    "pengaris":     { harga: 7000,  img: "./IMG/pengaris.jpg" },
+    "tas sekolah":  { harga: 150000, img: "./IMG/tas sekolah.jpg" },
 };
 
 // Helper Penyimpanan
@@ -148,8 +147,11 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         document.querySelectorAll('.product-item').forEach(item => {
             const nama = item.querySelector('h3').textContent.trim().toLowerCase();
-            const btn = item.querySelector('.btn-keranjang');
-            if (btn) btn.onclick = () => tambahKeKeranjang(nama);
+            const btnKeranjang = item.querySelector('.btn-keranjang');
+            if (btnKeranjang) btnKeranjang.onclick = () => tambahKeKeranjang(nama);
+            
+            const btnBeli = item.querySelector('.btn-beli');
+            if (btnBeli) btnBeli.onclick = () => beliLangsung(nama);
         });
     }
 });
@@ -168,6 +170,19 @@ function hapusRiwayat(idx) {
     history.splice(idx, 1);
     saveHistory(history);
     renderHistory();
+}
+
+function beliLangsung(nama) {
+    const cart = getCart();
+    const item = cart.find(i => i.nama === nama);
+    if (item) {
+        item.qty += 1;
+    } else {
+        const info = productData[nama];
+        cart.push({ nama, harga: info.harga, img: info.img, qty: 1 });
+    }
+    saveCart(cart);
+    window.location.href = 'pembayaran.html';
 }
 
 // Pencarian produk
