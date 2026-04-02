@@ -1,6 +1,6 @@
 
 const productData = {
-    "buku tulis":   { harga: 20000, img: "./IMG/buku Tulis.jpeg" },
+    "buku tulis":   { harga: 20000, img: "./IMG/buku tulis.jpeg" },
     "pulpen":       { harga: 5000,  img: "./IMG/pulpen.jpeg" },
     "pensil":       { harga: 3000,  img: "./IMG/pensil.jpeg" },
     "penghapus":    { harga: 2000,  img: "./IMG/penghapus.jpeg" },
